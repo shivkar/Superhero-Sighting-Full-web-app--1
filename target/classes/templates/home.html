@@ -1,0 +1,107 @@
+
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <style>
+            nav .btn {
+
+                background-color: #8FBC8F;
+                color: #fef9ff;
+                margin-right: 30px;
+                text-align: center;
+                width: 150px !important;
+            }
+            nav .btn:hover {
+                font-weight: bold;
+                color: #ffffff;
+            }
+            .container {
+  background-color: #deb887;
+  color: white;
+  border: 2px solid black;}
+            
+           
+
+        </style>
+
+
+
+    <br><br>
+    <title>Super Sightings!</title>
+</head>
+<body>
+
+    <!-- Main Body of Page -->
+
+    <div class="container">
+
+        <h1 style="font-size: 3.0em ;background-color:palevioletred;" class="text-center border border-solid">
+            Super Sightings</h1>
+        <br><br>
+        <nav class="text-center">
+            <a class="btn badge-pill " href="home.html">Home</a>
+            <a class="btn badge-pill" href="http://localhost:8080/sightings">Sightings</a>
+            <a class="btn badge-pill" href="http://localhost:8080/superheros">Superheros</a>
+            <a class="btn badge-pill" href="http://localhost:8080/powers">Powers</a>
+            <a class="btn badge-pill" href="http://localhost:8080/locations">Locations</a>
+            <a class="btn badge-pill" href="http://localhost:8080/organizations">Organizations</a>	
+        </nav>
+
+        <br><br>
+        <div class="col-md-2"></div>
+                
+            <p style="font-size: 1.5em"  class = "text-left" >The Superhero sightings web application is where those heroes and villains  spotted. You can learn more about your favorite Superheros.</p><br>
+            <p style="font-size: 1.5em"  class = "text-left"> Here you can find superheros  sighting database! </p>
+            <br><br>
+            
+            <h1 style="font-size: 2.0em" id="latestsightings" class="text-left">Latest  Sightings!</h1>
+          
+            <br>
+
+            <table id="latestSightingsTable" class="table table-hover">
+
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Super</th>
+                        <th>Location</th>
+                        <th>Date</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody id="contentRows">
+
+                    <tr th:each="sighting : ${sightings}">
+                        <td th:text="${sighting.sightingId}">ID</td>
+                        <td th:text="${sighting.superhero.name}">Super</td>
+                        <td th:each="location: ${sighting.location}"><p th:text="${location.locname}">Location</p></td>
+                        <td th:text="${sighting.sightingTime}">Sighting Time</td>
+                         <td><a href="#" th:href="@{/detailSighting(id=${sighting.sightingId})}">Details</a></td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+
+    <!-- End main body -->
+    <div class="text-center"><strong>
+            <a href="http://maps.google.com/maps">
+                View map</a></strong>
+    </div>
+</div> 
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+com\sg\superherosightings\dao\SuperheroDaoDBTest.class
+com\sg\superherosightings\dao\OrganizationsDaoDBTest.class
+com\sg\superherosightings\dao\PowersDaoDBTest.class
+com\sg\superherosightings\dao\LocationsDaoDBTest.class
+com\sg\superherosightings\dao\SightingsDaoDBTest.class
+com\sg\superherosightings\SuperherosightingsApplicationTests.class
