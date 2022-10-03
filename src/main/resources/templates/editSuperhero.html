@@ -51,7 +51,11 @@
             <a class="btn badge-pill" href="organizations">Organizations</a>	
         </nav>
         <br><br>
-
+<div class="col-12 m-1 text-center" 
+             th:if="${!errors.isEmpty()}">
+            <p class="alert alert-danger" 
+               th:each="error : ${errors}" th:text="${error.message}">Error message</p>
+        </div>
         <div class="row m-4 border border-dark">
             <div class="col-3 text-center m-3 ">
                 <span class="h3">Edit Superhero:</span>
@@ -71,11 +75,7 @@
                                    id="name"
                                    name="name"
                                    />
-                            <div th:if="${#fields.hasErrors('superhero.name')}">
-                                <p th:each="error : ${#fields.errors('superhero.name')}" 
-                                   class="alert alert-danger" th:text="${error}">
-                                    Bad name </p>
-                            </div>
+                            
                         </div>
                     </div>
                     <div class="form-group row">
@@ -90,11 +90,7 @@
                                    id="description"
                                    name="description"
                                    /> 
-                            <div th:if="${#fields.hasErrors('superhero.description')}">
-                                <p th:each="error : ${#fields.errors('superhero.description')}" 
-                                   class="alert alert-danger" th:text="${error}">
-                                    Bad description </p>
-                            </div>
+                           
                         </div>
                     </div>
                     <div class="form-group row">
@@ -111,11 +107,7 @@
                                         th:selected="${superhero.powers.contains(power)}">
                                 </option>
                             </select>
-                            <div th:if="${#fields.hasErrors('superhero.powers')}">
-                                <p th:each="error : ${#fields.errors('superhero.powers')}" 
-                                   class="alert alert-danger" th:text="${error}"> 
-                                    Bad power </p>
-                            </div>
+                            
                         </div>
                     </div>
 
