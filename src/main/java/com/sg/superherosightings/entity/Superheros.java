@@ -32,9 +32,9 @@ public class Superheros {
 
     
     private boolean isHero;
-   
+   @NotEmpty(message = "Power must not be empty.")
     List<Powers> powers;
-   
+   @NotEmpty(message = "Organization must not be empty.")
     List<Organizations> organizations;
     
     public Superheros() {
