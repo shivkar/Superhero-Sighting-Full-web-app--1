@@ -118,28 +118,15 @@ public class PowerController {
 
         Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
         violations = validate.validate(power);
-        if (!violations.isEmpty()) {
+        if (violations.isEmpty()) {
             powerDao.updatePower(power);
-            
-         //  redirectAttributes.addAttribute("id", power.id);
-         // redirectAttributes.addAttribute("errors", violations.toString());
-          //  return "redirect:editPower";
-         return "redirect:/editPower";
+         
+         return "redirect:/detailPower";
     }
         
-        else {
-                power = powerDao.getPowerById(id);
-            
-                }
-        //  if (result.hasErrors()) {
-        //  redirectAttributes.addAttribute("id", power.id);
-        //  return "redirect:editPower";
-        //  } 
-        
-        // model.addAttribute(violations.toString());
-         //powerDao.updatePower(power);
-        redirectAttributes.addAttribute("errors", violations.toString());
+       
+       // redirectAttributes.addAttribute("errors", violations.toString());
         redirectAttributes.addAttribute("id", power.id);
-        return "redirect:detailPower";
+        return "redirect:editPower";
     }
 }
