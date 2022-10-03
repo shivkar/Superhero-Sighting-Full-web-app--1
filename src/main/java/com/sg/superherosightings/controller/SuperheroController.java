@@ -144,7 +144,7 @@ public class SuperheroController {
         model.addAttribute("superhero", superhero);
         model.addAttribute("powers", powers);
         model.addAttribute("organizations", organizations);
-           
+            model.addAttribute("errors", violations);
         return "editSuperhero";
     }
 
@@ -159,16 +159,16 @@ public class SuperheroController {
         String[] powerIds = request.getParameterValues("powerId");
         String[] organizationIds = request.getParameterValues("organizationId");
         
+        superhero.setName(name);
+        superhero.setDescription(description);
+        
         List<Powers> powers = new ArrayList<>();
         if (powerIds != null) {
             for (String powerId : powerIds) {
                 powers.add(powerDao.getPowerById(Integer.parseInt(powerId)));
             }
         }
-        else {
-            FieldError error = new FieldError("superheros", "powers", "Must include one power");
-            result.addError(error);
-        }
+        
         superhero.setPowers(powers);
         
         List<Organizations> organizations = new ArrayList<>();
@@ -177,44 +177,22 @@ public class SuperheroController {
                 organizations.add(organizationDao.getOrganizationById(Integer.parseInt(organizationId)));
             }
         }
-        
-        else {
-            FieldError error = new FieldError("superheros", "organizations", "Must include one organization");
-            result.addError(error);
-        }
-        
+            
          superhero.setOrganizations(organizations);
           
-        //Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
-       //   violations = validate.validate(superhero);
-         //  if(violations.isEmpty()) {superheroDao.updateSuperhero(superhero);
-           
-        
-       //  return "redirect:/superheros";
-   // }
-        
-         //else {
-          //  superhero = superheroDao.getSuperheroById(superhero.getId());
-          //  model.addAttribute("superhero", superhero);
-        
-        superhero.setName(name);
-        superhero.setDescription(description);
-        
-         if(result.hasErrors()) {
-            model.addAttribute("powers", powerDao.getAllPowers());
-            model.addAttribute("organizations", organizationDao.getAllOrganizations());
-            model.addAttribute("superhero", superhero);
-            redirectAttributes.addAttribute("id", superhero.id);
+          Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
+           violations = validate.validate(superhero);
+           if(violations.isEmpty()) {
+                   superheroDao.updateSuperhero(superhero);
+                    redirectAttributes.addAttribute("id", superhero.id);
             return "redirect:detailSuperhero";
         }
-       
-       //  superheroDao.updateSuperhero(superhero);
-       
-        model.addAttribute("errors", violations);
+        
+     
         redirectAttributes.addAttribute("id", superhero.id);
-       // return  "redirect:/superheros";
+       
          
-       return  "redirect: detailSuperhero";
+       return  "redirect: editSuperhero";
     }
 
 }
